@@ -20,7 +20,7 @@ class TestOrderWrapper(unittest.TestCase):
         self.assertEqual(blank_report, expected)
 
     def test_calculate_quantity(self):
-        quantity = order_wrapper._calculate_quantity(order.cash, order.price)
+        quantity = order_wrapper._calculate_quantity(order)
         expected = 6
         self.assertEqual(quantity, expected)
 
