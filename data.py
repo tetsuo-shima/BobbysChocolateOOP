@@ -3,7 +3,17 @@ import csv
 from constants import ORDER_FILE, BONUS_PROMOTION_ACTIVATED
 from orderdata import OrderData
 
-#TODO: add tests
+
+# TODO: add tests
+
+def _read_csv(datafile=ORDER_FILE):
+    with open(datafile, 'r') as file:
+        csv_reader = csv.DictReader(file)
+        orders = [order for order in csv_reader]
+
+    return orders
+
+
 def _cast_integers(orders: dict):
     new_orders = copy.deepcopy(orders)
     for order in new_orders:
@@ -17,10 +27,7 @@ def _cast_integers(orders: dict):
 
 
 def load_orders(datafile=ORDER_FILE) -> list:
-    with open(datafile, 'r') as file:
-        csv_reader = csv.DictReader(file)
-        orders = [order for order in csv_reader]
-
+    orders = _read_csv(datafile)
     return [OrderData(**order) for order in _cast_integers(orders)]
 
 
