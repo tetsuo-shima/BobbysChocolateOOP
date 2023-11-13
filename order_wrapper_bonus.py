@@ -3,7 +3,7 @@ from chocolate_type import ChocolateType
 from order_wrapper import OrderWrapper
 
 
-class OrderWrapperBonus(ABC, OrderWrapper):
+class OrderWrapperBonus(OrderWrapper, ABC):
 
     @abstractmethod
     def _process_bonus(self) -> int:
@@ -21,12 +21,12 @@ class OrderWrapperBonusMilk(OrderWrapperBonus):
         return self._calculate_quantity(self.order) // self.order.ratio
 
     def process_order(self):
-        report = _create_blank_report()
+        report = self._create_blank_report()
 
         for key in report.keys():
-            if key == self.order['type']:
-                report[key] = (_calculate_quantity(self.order) +
-                               _process_bonus(self.order))
+            if key == self.order.type:
+                report[key] = (self._calculate_quantity(self.order) +
+                               self._process_bonus())
 
         return report
 
