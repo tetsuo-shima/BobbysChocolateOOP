@@ -51,7 +51,22 @@ class OrderWrapperBonusViolet(OrderWrapperBonus):
 
 
 class OrderWrapperBonusEspresso(OrderWrapperBonus):
-    pass
+    def __init__(self, order, flavors=ChocolateType):
+        self.order = order
+        self.flavors = flavors
+
+    def _process_bonus(self) -> int:
+        return self._calculate_quantity(self.order) // self.order.ratio
+
+    def process_order(self):
+        report = self._create_blank_report()
+        bonus = report['milk'] = self._process_bonus()
+
+        for key in report.keys():
+            if key == self.order.type:
+                report[key] = self._calculate_quantity(self.order) + bonus
+
+        return report
 
 
 class OrderWrapperBonusRuby(OrderWrapperBonus):
