@@ -1,9 +1,10 @@
 import unittest
 from order_wrapper_bonus import OrderWrapperBonusEspresso
 from orderdata import OrderData
+from test_resources.test_chocolate_type import ChocolateType as Ct
 
 order = OrderData(**{'type': 'espresso', 'cash': 6, 'price': 2, 'ratio': 2})
-order_wrapper = OrderWrapperBonusEspresso(order)
+order_wrapper = OrderWrapperBonusEspresso(order, Ct)
 
 
 class TestOrderWrapperBonusViolet(unittest.TestCase):
