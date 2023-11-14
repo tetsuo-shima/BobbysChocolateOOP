@@ -6,7 +6,7 @@ from order_wrapper_bonus import (OrderWrapperBonusMilk,
 from order_wrapper import OrderWrapperRegular
 from chocolate_type import ChocolateType
 
-
+# TODO: Write tests
 class OrderWrapperFactory:
 
     def _get_promotion_wrapper(self, order_type):
@@ -24,3 +24,5 @@ class OrderWrapperFactory:
             return self._get_promotion_wrapper(order.type)(order)
         else:
             return OrderWrapperRegular(order)
+
+        # TODO: raise Exception if order.type not in promotion_wrappers

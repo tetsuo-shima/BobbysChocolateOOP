@@ -9,6 +9,7 @@ def main():
     reports = [wrapped_order.process_order() for wrapped_order
                in wrapped_orders]
 
+    # TODO: change wrapper output from dictionary to dataclass
     for report in reports:
         results = [f'{key} {value}, ' for key, value in report.items()]
         print(''.join(results)[:-2])
