@@ -8,10 +8,7 @@ from orderdata import OrderData
 
 def _read_csv(datafile=ORDER_FILE):
     with open(datafile, 'r') as file:
-        csv_reader = csv.DictReader(file)
-        orders = [order for order in csv_reader]
-
-    return orders
+        return [order for order in csv.DictReader(file)]
 
 
 def _cast_integers(orders: dict):
@@ -29,24 +26,3 @@ def _cast_integers(orders: dict):
 def load_orders(datafile=ORDER_FILE) -> list:
     orders = _read_csv(datafile)
     return [OrderData(**order) for order in _cast_integers(orders)]
-
-
-# TODO: add test for this
-def pair_processing(orders: list) -> list:
-    processing_pairs = []
-    for order in orders:
-        if BONUS_PROMOTION_ACTIVATED:
-            if order['type'] == 'ruby':
-                pair = (order, ruby_bonus)
-            elif order['type'] == 'milk':
-                pair = (order, milk_bonus)
-            elif order['type'] == 'violet':
-                pair = (order, violet_bonus)
-            elif order['type'] == 'espresso':
-                pair = (order, espresso_bonus)
-        else:
-            pair = (order, process_regular_order)
-
-        processing_pairs.append(pair)
-
-    return processing_pairs
