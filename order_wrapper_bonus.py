@@ -39,6 +39,7 @@ class OrderWrapperBonusViolet(OrderWrapperBonus):
 
     def _process_bonus(self) -> int:
         return (self._calculate_quantity(self.order) // self.order.ratio) * 2
+
     def process_order(self):
         report = self._create_blank_report()
 
@@ -60,7 +61,7 @@ class OrderWrapperBonusEspresso(OrderWrapperBonus):
 
     def process_order(self):
         report = self._create_blank_report()
-        bonus = report['milk'] = self._process_bonus()
+        bonus = report[self.flavors.milk.name] = self._process_bonus()
 
         for key in report.keys():
             if key == self.order.type:
