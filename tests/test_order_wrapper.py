@@ -1,9 +1,10 @@
 import unittest
 from order_wrapper import OrderWrapperRegular
 from orderdata import OrderData
+from test_resources.test_chocolate_type import ChocolateType as Ct
 
 order = OrderData(**{'type': 'milk', 'cash': 12, 'price': 2, 'ratio': 5})
-order_wrapper = OrderWrapperRegular(order)
+order_wrapper = OrderWrapperRegular(order, Ct)
 
 
 class TestOrderWrapper(unittest.TestCase):
