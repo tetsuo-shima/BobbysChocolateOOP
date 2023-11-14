@@ -1,16 +1,21 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from data import load_orders
+from order_wrapper_factory import OrderWrapperFactory
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def main():
+    factory = OrderWrapperFactory()
+    wrapped_orders = [factory.wrap_order(order) for order in load_orders()]
+
+    reports = [wrapped_order.process_order() for wrapped_order
+               in wrapped_orders]
+
+    for report in reports:
+        results = [f'{key} {value}, ' for key, value in report.items()]
+        print(''.join(results)[:-2])
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    main()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
