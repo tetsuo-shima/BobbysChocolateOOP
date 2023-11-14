@@ -21,11 +21,11 @@ class TestOrderWrapper(unittest.TestCase):
         self.assertEqual(blank_report, expected)
 
     def test_calculate_quantity(self):
-        quantity = order_wrapper._calculate_quantity(order)
+        actual = order_wrapper._calculate_quantity(order)
         expected = 6
-        self.assertEqual(quantity, expected)
+        self.assertEqual(actual, expected)
 
     def test_process_order(self):
-        report = order_wrapper.process_order()
+        actual = order_wrapper.process_order()
         expected = {'milk': 6, 'violet': 0, 'espresso': 0}
-        self.assertEqual(report, expected)
+        self.assertEqual(actual, expected)
