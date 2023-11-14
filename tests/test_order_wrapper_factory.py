@@ -48,3 +48,4 @@ class TestOrderWrapperFactory(unittest.TestCase):
         )
         with self.assertRaises(NameNotFoundException):
             factory.wrap_order(order)
+
